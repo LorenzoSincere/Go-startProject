@@ -1,6 +1,8 @@
 package Repository
 
 import (
+	"errors"
+	"gorm.io/gorm"
 	"startProject/go-project-example/Util"
 	"sync"
 	"time"
@@ -35,6 +37,9 @@ func NewTopicDaoInstance() *TopicDao {
 func (*TopicDao) QueryTopicById(id int64) (*Topic, error) {
 	var topic Topic
 	err := db.Where("id = ?", id).Find(&topic).Error
+	if errors.Is(err, gorm.ErrRecordNotFound) {
+		return nil, nil
+	}
 	if err != nil {
 		Util.Logger.Error("find topic by id err:" + err.Error())
 	}
