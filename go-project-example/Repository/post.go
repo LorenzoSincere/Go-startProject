@@ -5,15 +5,16 @@ import (
 	"gorm.io/gorm"
 	"startProject/go-project-example/Util"
 	"sync"
+	"time"
 )
 
 type Post struct {
-	Id        int64  `gorm:"column:id"`
-	ParentId  int64  `gorm:"column:parent_id"`
-	UserId    int64  `gorm:"column:user_id"`
-	Content   string `gorm:"column:content"`
-	DiggCount int    `gorm:"column:digg_count"`
-	Created   int64  `gorm:"column:created"`
+	Id        int64     `gorm:"column:id"`
+	ParentId  int64     `gorm:"column:parent_id"`
+	UserId    int64     `gorm:"column:user_id"`
+	Content   string    `gorm:"column:content"`
+	DiggCount int       `gorm:"column:digg_count"`
+	CreatedAt time.Time `gorm:"column:created"`
 }
 
 func (Post) TableName() string {
